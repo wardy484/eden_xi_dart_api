@@ -1,39 +1,55 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Eden XI Tools Dart API
+A dart api client that for the Final Fantasy XI Eden private server tools. 
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+Disclaimer: I am in no way affiliated with the Eden project just a player who wanted to wrap the website tools in an app.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
+Some useful links (including a shameless plug for my app):
+- [Eden XI](https://edenxi.com/)
+- [Eden XI Tools](https://edenxi.com/tools)
+- [IOS App Store](https://apps.apple.com/gb/app/eden-tools-xi/id1606623676)
+- [Android Google Play Store](https://play.google.com/store/apps/details?id=com.kimward.eden_xi_tools)
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Currently enables you to mirror most if not all actions available in the tools sections of the eden website.
 
-## Getting started
+### Item API:
+- Item search
+- Get auction house listings for an item
+- Get bazaar listings for an item
+- Get a specific item
+- Get owners of a specific item
+- Get crafts for an item
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+### Player API:
+- Player search
+- Get player equipment
+- Get specific player
+- Get player crafts
+- Get player auction house listings
+- Get player bazaar listings
+
+## Installation
+Flutter
+``` bash
+flutter pub add eden_xi_tools_api
+```
+
+Dart
+``` bash
+dart pub add eden_xi_tools_api
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
 ```dart
-const like = 'sample';
+  var edenXiApi = EdenXiApi();
+
+  edenXiApi.players.getPlayer('wardy').then((player) {
+    print(player.toJson());
+  });
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+## Todo:
+- Add tests
+- Rename methods to better describe function
+- Better documention
