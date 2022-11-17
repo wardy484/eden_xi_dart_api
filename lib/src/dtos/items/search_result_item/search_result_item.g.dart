@@ -11,7 +11,7 @@ _$_SearchResultItem _$$_SearchResultItemFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       name: json['name'] as String,
       sort: json['sort'] as String,
-      key: json['key'] as String,
+      key: json['key'] as int,
     );
 
 Map<String, dynamic> _$$_SearchResultItemToJson(_$_SearchResultItem instance) =>

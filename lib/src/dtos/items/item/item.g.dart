@@ -10,7 +10,7 @@ _$_Item _$$_ItemFromJson(Map<String, dynamic> json) => _$_Item(
       id: json['id'] as int,
       armor: json['armor'] as String?,
       desc: json['desc'] as String,
-      key: json['key'] as String,
+      key: json['key'] as int,
       name: json['name'] as String,
       sort: json['sort'] as String,
       stackable: json['stackable'] as bool,

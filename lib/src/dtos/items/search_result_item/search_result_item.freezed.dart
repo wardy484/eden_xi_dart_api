@@ -23,7 +23,7 @@ mixin _$SearchResultItem {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get sort => throw _privateConstructorUsedError;
-  String get key => throw _privateConstructorUsedError;
+  int get key => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $SearchResultItemCopyWith<$Res> {
   factory $SearchResultItemCopyWith(
           SearchResultItem value, $Res Function(SearchResultItem) then) =
       _$SearchResultItemCopyWithImpl<$Res>;
-  $Res call({int id, String name, String sort, String key});
+  $Res call({int id, String name, String sort, int key});
 }
 
 /// @nodoc
@@ -71,7 +71,7 @@ class _$SearchResultItemCopyWithImpl<$Res>
       key: key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ));
   }
 }
@@ -83,7 +83,7 @@ abstract class _$$_SearchResultItemCopyWith<$Res>
           _$_SearchResultItem value, $Res Function(_$_SearchResultItem) then) =
       __$$_SearchResultItemCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String name, String sort, String key});
+  $Res call({int id, String name, String sort, int key});
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class __$$_SearchResultItemCopyWithImpl<$Res>
       key: key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ));
   }
 }
@@ -144,7 +144,7 @@ class _$_SearchResultItem implements _SearchResultItem {
   @override
   final String sort;
   @override
-  final String key;
+  final int key;
 
   @override
   String toString() {
@@ -187,7 +187,7 @@ abstract class _SearchResultItem implements SearchResultItem {
       {required final int id,
       required final String name,
       required final String sort,
-      required final String key}) = _$_SearchResultItem;
+      required final int key}) = _$_SearchResultItem;
 
   factory _SearchResultItem.fromJson(Map<String, dynamic> json) =
       _$_SearchResultItem.fromJson;
@@ -199,7 +199,7 @@ abstract class _SearchResultItem implements SearchResultItem {
   @override
   String get sort;
   @override
-  String get key;
+  int get key;
   @override
   @JsonKey(ignore: true)
   _$$_SearchResultItemCopyWith<_$_SearchResultItem> get copyWith =>

@@ -7,7 +7,7 @@ final dioClient = Dio(
   BaseOptions(
     baseUrl: 'https://edenxi.com/api/v1/',
   ),
-);
+)..interceptors.add(LogInterceptor());
 
 class EdenXiApi {
   final ItemRepository items;

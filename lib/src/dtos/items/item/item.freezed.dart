@@ -23,7 +23,7 @@ mixin _$Item {
   int get id => throw _privateConstructorUsedError;
   String? get armor => throw _privateConstructorUsedError;
   String get desc => throw _privateConstructorUsedError;
-  String get key => throw _privateConstructorUsedError;
+  int get key => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get sort => throw _privateConstructorUsedError;
   bool get stackable => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $ItemCopyWith<$Res> {
       {int id,
       String? armor,
       String desc,
-      String key,
+      int key,
       String name,
       String sort,
       bool stackable});
@@ -81,7 +81,7 @@ class _$ItemCopyWithImpl<$Res> implements $ItemCopyWith<$Res> {
       key: key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$_ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
       {int id,
       String? armor,
       String desc,
-      String key,
+      int key,
       String name,
       String sort,
       bool stackable});
@@ -148,7 +148,7 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
       key: key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -187,7 +187,7 @@ class _$_Item extends _Item {
   @override
   final String desc;
   @override
-  final String key;
+  final int key;
   @override
   final String name;
   @override
@@ -242,7 +242,7 @@ abstract class _Item extends Item {
       {required final int id,
       final String? armor,
       required final String desc,
-      required final String key,
+      required final int key,
       required final String name,
       required final String sort,
       required final bool stackable}) = _$_Item;
@@ -257,7 +257,7 @@ abstract class _Item extends Item {
   @override
   String get desc;
   @override
-  String get key;
+  int get key;
   @override
   String get name;
   @override

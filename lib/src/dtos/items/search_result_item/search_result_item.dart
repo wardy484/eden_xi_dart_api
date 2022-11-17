@@ -9,7 +9,7 @@ class SearchResultItem with _$SearchResultItem {
     required int id,
     required String name,
     required String sort,
-    required String key,
+    required int key,
   }) = _SearchResultItem;
 
   factory SearchResultItem.fromJson(Map<String, dynamic> json) =>

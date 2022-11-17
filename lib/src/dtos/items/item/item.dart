@@ -11,7 +11,7 @@ class Item with _$Item {
     required int id,
     String? armor,
     required String desc,
-    required String key,
+    required int key,
     required String name,
     required String sort,
     required bool stackable,
