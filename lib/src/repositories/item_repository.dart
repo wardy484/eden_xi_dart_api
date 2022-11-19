@@ -5,87 +5,74 @@ import 'package:eden_xi_tools_api/src/dtos/items/crafts/craft.dart';
 import 'package:eden_xi_tools_api/src/dtos/items/item/item.dart';
 import 'package:eden_xi_tools_api/src/dtos/items/owner/owner.dart';
 import 'package:eden_xi_tools_api/src/dtos/items/search_result/search_result.dart';
+import 'package:eden_xi_tools_api/src/repositories/base_repository.dart';
 
-class ItemRepository {
-  final Dio _dio;
-
-  ItemRepository(Dio dio) : _dio = dio;
+class ItemRepository extends BaseRepository {
+  ItemRepository(Dio dio) : super(dio);
 
   Future<SearchResult> search(
       String itemName, int startIndex, int limit) async {
     final encodedItemName = Uri.encodeFull(itemName);
-    final response = await _dio
-        .get('/items?search=$encodedItemName&limit=$limit&offset=$startIndex');
 
-    if (response.statusCode == 200) {
-      return SearchResult.fromJson(response.data);
-    } else {
-      throw Exception("Erroring fetching search results from Eden server.");
-    }
+    return get(
+      '/items?search=$encodedItemName&limit=$limit&offset=$startIndex',
+      (response) => SearchResult.fromJson(response.data),
+    );
   }
 
   Future<List<AuctionHouseItem>> getAuctionHouseItem(
     String itemKey,
     bool stacked,
   ) async {
-    final response = await _dio.get('/items/$itemKey/ah?stack=$stacked');
-
-    if (response.statusCode == 200) {
-      return response.data.map<AuctionHouseItem>((item) {
-        return AuctionHouseItem.fromJson(item);
-      }).toList();
-    } else {
-      throw Exception(
-        "Erroring fetching auction house items from Eden server.",
-      );
-    }
+    return get(
+      '/items/$itemKey/ah?stack=$stacked',
+      (response) {
+        return response.data.map<AuctionHouseItem>((item) {
+          return AuctionHouseItem.fromJson(item);
+        }).toList();
+      },
+    );
   }
 
   Future<List<BazaarItem>> getBazaarItems(String itemKey) async {
-    final response = await _dio.get('/items/$itemKey/bazaar');
-
-    if (response.statusCode == 200) {
-      return response.data.map<BazaarItem>((item) {
-        return BazaarItem.fromJson(item);
-      }).toList();
-    } else {
-      throw Exception("Erroring fetching bazaar items from Eden server.");
-    }
+    return get(
+      '/items/$itemKey/bazaar',
+      (response) {
+        return response.data.map<BazaarItem>((item) {
+          return BazaarItem.fromJson(item);
+        }).toList();
+      },
+    );
   }
 
   Future<Item> getItem(String key) async {
-    final response = await _dio.get('/items/$key');
-
-    if (response.statusCode == 200) {
-      return Item.fromJson(response.data);
-    } else {
-      throw Exception("Erroring fetching item from Eden server.");
-    }
+    return get(
+      '/items/$key',
+      (response) => Item.fromJson(response.data),
+    );
   }
 
   Future<List<Owner>> getOwners(int key) async {
-    final response = await _dio.get('/items/$key/owners');
+    return get(
+      '/items/$key/owners',
+      (response) {
+        List owners = response.data as List;
 
-    if (response.statusCode == 200) {
-      List owners = response.data as List;
-
-      return owners.map((owner) => Owner(owner)).toList();
-    } else {
-      throw Exception("Erroring fetching item from Eden server.");
-    }
+        return owners.map((owner) => Owner(owner)).toList();
+      },
+    );
   }
 
   Future<List<Craft>> getCrafts(String key) async {
-    final response = await _dio.get('/items/$key/crafts');
+    return get(
+      '/items/$key/crafts',
+      (response) {
+        List crafts = response.data as List;
 
-    if (response.statusCode == 200) {
-      List crafts = response.data as List;
-
-      return crafts.map<Craft>((craft) {
-        return Craft.fromJson(craft);
-      }).toList();
-    } else {
-      throw Exception("Erroring fetching item from Eden server.");
-    }
+        return crafts.map<Craft>((craft) {
+          return Craft.fromJson(craft);
+        }).toList();
+      },
+    );
   }
 }

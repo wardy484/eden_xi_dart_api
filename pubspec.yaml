@@ -1,6 +1,6 @@
 name: eden_xi_tools_api
 description: A dart api client that for the Final Fantasy XI Eden private server tools.
-version: 1.0.0
+version: 1.0.2
 homepage: https://github.com/wardy484/eden_xi_dart_api
 
 environment:

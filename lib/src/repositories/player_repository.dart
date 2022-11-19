@@ -5,11 +5,10 @@ import 'package:eden_xi_tools_api/src/dtos/player/player_bazaar_item/player_baza
 import 'package:eden_xi_tools_api/src/dtos/player/player_crafts/player_crafts.dart';
 import 'package:eden_xi_tools_api/src/dtos/player/player_equipment/player_equipment.dart';
 import 'package:eden_xi_tools_api/src/dtos/player/player_search_result/player_search_results.dart';
+import 'package:eden_xi_tools_api/src/repositories/base_repository.dart';
 
-class PlayerRepository {
-  final Dio _dio;
-
-  PlayerRepository(Dio dio) : _dio = dio;
+class PlayerRepository extends BaseRepository {
+  PlayerRepository(Dio dio) : super(dio);
 
   String _buildSearchUrl(
     String playerName,
@@ -27,48 +26,29 @@ class PlayerRepository {
     int limit,
   ) async {
     final url = _buildSearchUrl(playerName, startIndex, limit, false);
-    final response = await _dio.get(url);
 
-    if (response.statusCode == 200) {
-      return PlayerSearchResult.fromJson(response.data);
-    } else {
-      throw Exception(
-          "Erroring fetching player search results from Eden server.");
-    }
+    return get(url, (response) => PlayerSearchResult.fromJson(response.data));
   }
 
   Future<PlayerEquipment> getEquipment(String playerName) async {
-    final response = await _dio.get('/chars/$playerName/equip');
-
-    if (response.statusCode == 200) {
-      return PlayerEquipment.fromJson(response.data);
-    } else {
-      throw Exception("Erroring fetching player equipment from Eden server.");
-    }
+    return get(
+      '/chars/$playerName/equip',
+      (response) => PlayerEquipment.fromJson(response.data),
+    );
   }
 
   Future<Player> getPlayer(String playerName) async {
-    final response = await _dio.get('/chars/$playerName');
-
-    if (response.statusCode == 200) {
-      return Player.fromJson(response.data);
-    } else {
-      throw Exception(
-        "Erroring fetching player data for player from Eden server.",
-      );
-    }
+    return get(
+      '/chars/$playerName',
+      (response) => Player.fromJson(response.data),
+    );
   }
 
   Future<PlayerCrafts> getCrafts(String playerName) async {
-    final response = await _dio.get('/chars/$playerName/crafts');
-
-    if (response.statusCode == 200) {
-      return PlayerCrafts.fromJson(response.data);
-    } else {
-      throw Exception(
-        "Erroring fetching player crafting data for player from Eden server.",
-      );
-    }
+    return get(
+      '/chars/$playerName/crafts',
+      (response) => PlayerCrafts.fromJson(response.data),
+    );
   }
 
   double toDouble(dynamic value) {
@@ -82,35 +62,29 @@ class PlayerRepository {
   Future<List<PlayerAuctionHouseItem>> getAuctionHouseItems(
     String playerName,
   ) async {
-    final response = await _dio.get('/chars/$playerName/ah');
+    return get(
+      '/chars/$playerName/ah',
+      (response) {
+        final data = response.data;
 
-    if (response.statusCode == 200) {
-      final data = response.data;
-
-      return data.map<PlayerAuctionHouseItem>((item) {
-        return PlayerAuctionHouseItem.fromJson(item);
-      }).toList();
-    } else {
-      throw Exception(
-        "Erroring fetching auction house data for player from Eden server.",
-      );
-    }
+        return data.map<PlayerAuctionHouseItem>((item) {
+          return PlayerAuctionHouseItem.fromJson(item);
+        }).toList();
+      },
+    );
   }
 
   Future<List<PlayerBazaarItem>> getBazaarItems(String playerName) async {
-    final response = await _dio.get('chars/$playerName/bazaar');
-
-    if (response.statusCode == 200) {
-      return response.data.map<PlayerBazaarItem>((item) {
-        return PlayerBazaarItem(
-          bazaar: item['bazaar'],
-          itemName: item['name'],
-        );
-      }).toList();
-    } else {
-      throw Exception(
-        "Erroring fetching bazaar data for player from Eden server.",
-      );
-    }
+    return get(
+      '/chars/$playerName/bazaar',
+      (response) {
+        return response.data.map<PlayerBazaarItem>((item) {
+          return PlayerBazaarItem(
+            bazaar: item['bazaar'],
+            itemName: item['name'],
+          );
+        }).toList();
+      },
+    );
   }
 }

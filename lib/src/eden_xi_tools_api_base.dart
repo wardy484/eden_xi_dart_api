@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dio_logger/dio_logger.dart';
 import 'package:eden_xi_tools_api/src/repositories/player_repository.dart';
 import 'package:eden_xi_tools_api/src/repositories/item_repository.dart';
 import 'package:eden_xi_tools_api/src/repositories/server_repository.dart';
@@ -7,7 +8,7 @@ final dioClient = Dio(
   BaseOptions(
     baseUrl: 'https://edenxi.com/api/v1/',
   ),
-)..interceptors.add(LogInterceptor());
+)..interceptors.add(dioLoggerInterceptor);
 
 class EdenXiApi {
   final ItemRepository items;
